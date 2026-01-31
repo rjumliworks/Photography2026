@@ -49,7 +49,7 @@
                                                 :class="['form-control', form.errors.password && 'is-invalid']"  
                                                 @input="handleInput('password')"
                                                 style="background-color: #f5f6f7;">
-                                                <i class="ri-lock-2-fill text-muted"></i>
+                                                <i class="ri-lock-2-fill text-muted" :class="(form.errors.password) ? 'mt-n3' : ''"></i>
                                                 <InputError :message="form.errors.password" />
                                             </div>
                                             <BButton v-if="!form.errors.password" variant="link" class="position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon" @click="togglePassword = !togglePassword">

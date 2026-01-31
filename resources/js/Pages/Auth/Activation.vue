@@ -7,7 +7,7 @@
                 <BRow class="justify-content-center">
                     <BCol md="9" lg="7" xl="6">
                         <div class="card bg-light-subtle shadow-none border">
-                            <div class="card-header bg-success">
+                            <div class="card-header bg-primary">
                                 <div class="d-flex mb-n2">
                                     <div class="flex-shrink-0 me-3">
                                         <div style="height:2.5rem;width:2.5rem;">
@@ -30,25 +30,25 @@
                                         <ul class="nav nav-pills progress-bar-tab custom-nav" role="tablist">
                                             <li class="nav-item " role="presentation">
                                                 <div class="step-wrapper">
-                                                    <BButton variant="link" class="nav-link rounded-pill bg-success" :class="{ active: activeTab == 1, done: activeTab > 1 }" @click="toggleTab(1, 0);">1</BButton>
+                                                    <BButton variant="link" class="nav-link rounded-pill bg-primary" :class="{ active: activeTab == 1, done: activeTab > 1 }" @click="toggleTab(1, 0);">1</BButton>
                                                     <div class="step-title">Email Verification</div>
                                                 </div>
                                             </li>
                                             <li class="nav-item" role="presentation">
                                                 <div class="step-wrapper">
-                                                    <BButton variant="link" class="nav-link rounded-pill bg-success text-white" :class="{ active: activeTab == 2, done: activeTab > 2 }" @click="toggleTab(2,34);">2</BButton>
+                                                    <BButton variant="link" class="nav-link rounded-pill bg-primary text-white" :class="{ active: activeTab == 2, done: activeTab > 2 }" @click="toggleTab(2,34);">2</BButton>
                                                     <div class="step-title">Set Password</div>
                                                 </div>
                                             </li>
                                             <li class="nav-item" role="presentation">
                                                 <div class="step-wrapper">
-                                                    <BButton variant="link" class="nav-link rounded-pill bg-success text-white" :class="{ active: activeTab == 3, done: activeTab > 3 }" @click="toggleTab(3, 65);">3</BButton>
+                                                    <BButton variant="link" class="nav-link rounded-pill bg-primary text-white" :class="{ active: activeTab == 3, done: activeTab > 3 }" @click="toggleTab(3, 65);">3</BButton>
                                                     <div class="step-title">Upload Photo</div>
                                                 </div>
                                             </li>
                                             <li class="nav-item" role="presentation">
                                                 <div class="step-wrapper">
-                                                    <BButton variant="link" class="nav-link rounded-pill bg-success text-white" :class="{ active: activeTab == 4, done: activeTab > 4 }" @click="toggleTab(4, 100);">4</BButton>
+                                                    <BButton variant="link" class="nav-link rounded-pill bg-primary text-white" :class="{ active: activeTab == 4, done: activeTab > 4 }" @click="toggleTab(4, 100);">4</BButton>
                                                     <div class="step-title">Finish Activation</div>
                                                 </div>
                                             </li>
@@ -244,14 +244,14 @@
                             </div>
                             <div class="card-footer bg-light-subtle">
                                 <div v-if="activeTab == 1" class="d-flex align-items-start gap-3 mt-0 me-3">
-                                    <BButton variant="success" class="btn-label btn-sm right ms-auto nexttab nexttab" @click="toggleTab(2, 34);"><i class="ri-arrow-right-line label-icon align-middle fs-lg ms-2"></i>Go set password</BButton>
+                                    <BButton variant="primary" class="btn-label btn-sm right ms-auto nexttab nexttab" @click="toggleTab(2, 34);"><i class="ri-arrow-right-line label-icon align-middle fs-lg ms-2"></i>Go set password</BButton>
                                 </div>
                                 <div v-else-if="activeTab == 2" class="d-flex align-items-start gap-3 mt-0 me-3">
                                     <BButton variant="link" class="btn btn-sm btn-link text-decoration-none btn-label previestab" @click="toggleTab(1, 0);"><i class="ri-arrow-left-line label-icon align-middle fs-lg me-2"></i> 
                                         Back to Email Verification
                                     </BButton>
 
-                                    <BButton v-if="passwordStrength.percent == 100 && passwordMatches" variant="success" class="btn-label btn-sm right ms-auto nexttab nexttab" @click="toggleTab(3, 65);"><i class="ri-arrow-right-line label-icon align-middle fs-lg ms-2"></i>Next
+                                    <BButton v-if="passwordStrength.percent == 100 && passwordMatches" variant="primary" class="btn-label btn-sm right ms-auto nexttab nexttab" @click="toggleTab(3, 65);"><i class="ri-arrow-right-line label-icon align-middle fs-lg ms-2"></i>Next
                                     </BButton>
                                 </div> 
                                 <div v-else-if="activeTab == 3" class="d-flex align-items-start gap-3 mt-0 me-3">
@@ -259,14 +259,14 @@
                                         Back to Set Password
                                     </BButton>
 
-                                    <BButton v-if="hasAvatar" variant="success" class="btn-label btn-sm right ms-auto nexttab nexttab" @click="toggleTab(4, 100);"><i class="ri-arrow-right-line label-icon align-middle fs-lg ms-2"></i>Next
+                                    <BButton v-if="hasAvatar" variant="primary" class="btn-label btn-sm right ms-auto nexttab nexttab" @click="toggleTab(4, 100);"><i class="ri-arrow-right-line label-icon align-middle fs-lg ms-2"></i>Next
                                     </BButton>
                                 </div>
                                  <div v-else class="d-flex align-items-start gap-3 mt-0 me-3">
                                     <BButton variant="link" class="btn btn-sm btn-link text-decoration-none btn-label previestab" @click="toggleTab(3, 65);"><i class="ri-arrow-left-line label-icon align-middle fs-lg me-2"></i>
                                         Back to Upload Photo
                                     </BButton>
-                                          <BButton variant="success" class="btn-label btn-sm right ms-auto nexttab nexttab" @click="submit()"><i class="ri-checkbox-circle-fill  label-icon align-middle fs-lg ms-2"></i>Agree and Activate
+                                          <BButton variant="primary" class="btn-label btn-sm right ms-auto nexttab nexttab" @click="submit()"><i class="ri-checkbox-circle-fill  label-icon align-middle fs-lg ms-2"></i>Agree and Activate
                                     </BButton>
                                 </div>
                             </div>
