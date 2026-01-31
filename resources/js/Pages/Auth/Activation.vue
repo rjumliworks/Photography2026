@@ -23,7 +23,7 @@
                             <div class="car-body bg-white shadow-none" style="padding: 33px;">
                                 <form class="customform" @submit.prevent="submit">
                                     <div id="custom-progress-bar" class="progress-nav mb-4 position-relative">
-                                        <div class="progress step-progress progress-success progress-back" style="height: 6px; width: 106%; margin-left: -12px;">
+                                        <div class="progress step-progress progress-primary progress-back" style="height: 6px; width: 106%; margin-left: -12px;">
                                             <div class="progress-bar" role="progressbar" :style="`width: ${progressbarvalue}%;`"></div>
                                         </div>
 
@@ -61,7 +61,7 @@
                                                 <hr class="text-muted mt-n2"/>
                                                 <div class="mb-4 mt-0">
                                                     <div>
-                                                        <h5 class="fs-12 mb-3 text-success fw-semibold"><i class="bx bxs-key"></i> Enter Activation Code</h5>
+                                                        <h5 class="fs-12 mb-3 text-primary fw-semibold"><i class="bx bxs-key"></i> Enter Activation Code</h5>
                                                         <div class="alert alert-warning alert-border-left alert-dismissible fade show material-shadow fs-10" role="alert">
                                                             The <b>activation code</b> is used to verify your identity and confirm that your registered email address is <b>valid and accessible</b>.
                                                         </div>
@@ -216,12 +216,9 @@
                                                     <li class="list-group-item" v-if="hasAvatar"><i class="ri-checkbox-circle-fill fs-13 text-primary  align-middle lh-1 me-2"></i> Upload Identification Photo</li>
                                                     <li class="list-group-item" v-else><i class="ri-close-circle-fill fs-13 text-danger  align-middle lh-1 me-2"></i>Please upload your identification photo.</li>
                                                 </ul>
-                                                <div class="mb-4 mt-2">
+                                                <!-- <div class="mb-4 mt-2">
                                                     <div>
                                                         <h5 class="fs-10 mb-1 text-danger fw-semibold"><i class="ri-camera-fill me-1"></i>Terms and Condition</h5>
-                                                        <!-- <p class="fs-10 text-muted">
-                                                          By activating your account, you agree to use it solely for official government purposes, keep your login credentials secure and confidential, and comply with all applicable government security policies. You acknowledge that account activity may be monitored for security purposes and agree to report any suspicious activity immediately. Violation of these terms may result in account suspension and legal action.
-                                                        </p> -->
                                                     </div>
                                                 </div>
                                                 <div class="form-group mt-n3">
@@ -236,7 +233,7 @@
                                                         </ul>
                                                         <p style="margin-top: 10px;">Violation of these terms may result in account suspension and legal action.</p>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
