@@ -53,11 +53,12 @@ class RegisterController extends Controller
         ]);
         Mail::to($data->email)->queue(new PassCode($data, $code));
         // MailJob::dispatch($data);
-        return [
-            'data' => $data,
-            'message' => 'User creation was successful!', 
-            'info' => "You've successfully created an account for the user."
-        ];
+        // return [
+        //     'data' => $data,
+        //     'message' => 'User creation was successful!', 
+        //     'info' => "You've successfully created an account for the user."
+        // ];
+        return redirect()->route('login')->with('success', 'Please check your email. We have sent a temporary password for you to access the system.');
     }
 
 }

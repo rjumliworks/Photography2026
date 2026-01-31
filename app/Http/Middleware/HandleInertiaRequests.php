@@ -31,6 +31,7 @@ class HandleInertiaRequests extends Middleware
                 'info'    => session('info') ?? null,
                 'status'  => session('status') ?? null,
                 'type'    => session('type') ?? null,
+                'success' => fn () => $request->session()->get('success'),
             ],
         ];
     }

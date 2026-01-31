@@ -22,7 +22,14 @@
                             </div>
                             <div class="car-body bg-white shadow-none" style="padding: 33px;">
                                 <form class="customform" @submit.prevent="submit">
-                                    <div class="alert alert-warning alert-border-left alert-dismissible fade show material-shadow fs-11" role="alert">
+                                    <div v-if="$page.props.flash.success" 
+                                        class="alert alert-success alert-border-left alert-dismissible fade show material-shadow fs-11" 
+                                        role="alert">
+                                        <span class="fs-10" style="line-height: 1.2; display: inline-block;">
+                                            <strong>Success: </strong> {{ $page.props.flash.success }}
+                                        </span>
+                                    </div>
+                                    <div v-else class="alert alert-warning alert-border-left alert-dismissible fade show material-shadow fs-11" role="alert">
                                         <span class="fs-10" style="line-height: 1.2; display: inline-block;"> <strong>Security Notice :</strong> This system is restricted to authorized photograpers only. Unauthorized access is prohibited.</span>
                                     </div>
                                     <div class="mb-2">
