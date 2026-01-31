@@ -81,7 +81,7 @@
                                                 <p class="fs-10 text-muted">Please enter the 9-digit activation code sent to your registered email address.</p>
                                                 <h5 v-if="remainingTime > 0" class="fs-13 mt-4 text-success text-center fw-semibold"><i class="ri-mail-send-fill me-2"></i>Resend available in {{ formattedTime }}</h5>
                                                 <h5 v-else-if="codeValid == false" class="fs-11 mt-4 text-danger text-center"><i class="ri-error-warning-line fs-14 me-1"></i>Invalid activation code. Please check your email and try again.</h5>
-                                                <h5 v-else class="fs-13 mt-4 text-success text-center fw-semibold"><i class="ri-mail-send-fill me-2"></i>Resend Verification Code</h5>
+                                                <h5 v-else class="fs-13 mt-4 text-primary text-center fw-semibold"><i class="ri-mail-send-fill me-2"></i>Resend Verification Code</h5>
                                             </div>
                                         </div>
 
@@ -210,10 +210,10 @@
                                                 </div>
                                                 <ul class="list-group fs-10">
                                                     <li class="list-group-item" v-if="form.errors.code"><i class="ri-close-circle-fill fs-13 text-danger align-middle lh-1 me-2"></i>The activation code you entered is invalid.</li>
-                                                    <li class="list-group-item" v-else><i class="ri-checkbox-circle-fill fs-13 text-success align-middle lh-1 me-2"></i> Enter Activation Code</li>
+                                                    <li class="list-group-item" v-else><i class="ri-checkbox-circle-fill fs-13 text-primary align-middle lh-1 me-2"></i> Enter Activation Code</li>
                                                     <li class="list-group-item" v-if="form.errors.password"><i class="ri-close-circle-fill fs-13 text-danger  align-middle lh-1 me-2"></i>{{ form.errors.password }}</li>
-                                                    <li class="list-group-item" v-else><i class="ri-checkbox-circle-fill fs-13 text-success  align-middle lh-1 me-2"></i> Set Secure Password</li>
-                                                    <li class="list-group-item" v-if="hasAvatar"><i class="ri-checkbox-circle-fill fs-13 text-success  align-middle lh-1 me-2"></i> Upload Identification Photo</li>
+                                                    <li class="list-group-item" v-else><i class="ri-checkbox-circle-fill fs-13 text-primary  align-middle lh-1 me-2"></i> Set Secure Password</li>
+                                                    <li class="list-group-item" v-if="hasAvatar"><i class="ri-checkbox-circle-fill fs-13 text-primary  align-middle lh-1 me-2"></i> Upload Identification Photo</li>
                                                     <li class="list-group-item" v-else><i class="ri-close-circle-fill fs-13 text-danger  align-middle lh-1 me-2"></i>Please upload your identification photo.</li>
                                                 </ul>
                                                 <div class="mb-4 mt-2">
