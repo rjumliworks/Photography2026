@@ -91,7 +91,7 @@
                                                 <hr class="text-muted mt-n2"/>
                                                 <div class="mb-4 mt-0">
                                                     <div>
-                                                        <h5 class="fs-12 mb-1 text-success fw-semibold"><i class="ri-lock-2-fill me-1"></i> Set Secure Password</h5>
+                                                        <h5 class="fs-12 mb-1 text-primary fw-semibold"><i class="ri-lock-2-fill me-1"></i> Set Secure Password</h5>
                                                         <p class="fs-10 text-muted">
                                                           Passwords are required to be a minimum of eight (8) characters and must include uppercase and lowercase letters, numbers, and special characters.
                                                         </p>
@@ -164,7 +164,7 @@
                                                 <hr class="text-muted mt-n2"/>
                                                 <div class="mb-4 mt-0">
                                                     <div>
-                                                        <h5 class="fs-12 mb-1 text-success fw-semibold"><i class="ri-camera-fill me-1"></i>Upload Identification Photo</h5>
+                                                        <h5 class="fs-12 mb-1 text-primary fw-semibold"><i class="ri-camera-fill me-1"></i>Upload Identification Photo</h5>
                                                         <p class="fs-10 text-muted">
                                                           Submission of a clear and recent photograph is required to establish identity and comply with official account verification procedures.
                                                         </p>
