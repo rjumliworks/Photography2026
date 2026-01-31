@@ -34,7 +34,7 @@
                                             :class="['form-control', form.errors.email && 'is-invalid']" 
                                             @input="handleInput('email')"
                                             style="background-color: #f5f6f7;">
-                                            <i class="ri-user-2-fill text-muted"></i>
+                                            <i class="ri-user-2-fill text-muted" :class="(form.errors.email) ? 'mt-n3' : ''"></i>
                                             <InputError :message="form.errors.email" />
                                         </div>
                                        
