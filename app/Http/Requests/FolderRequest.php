@@ -26,6 +26,13 @@ class FolderRequest extends FormRequest
                     'tags.*' => 'integer|exists:list_tags,id'
                 ];
             break;
+            case 'viewer':
+                return [
+                    'name'   => 'required',   
+                    'email' => 'sometimes|required|email|max:150|unique:viewers,email_hash,'.$this->id,
+                ];
+            break;
+
         }
     }
 }

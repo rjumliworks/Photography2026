@@ -51,8 +51,8 @@
                             <p class="lead text-muted lh-base mb-4">Upload and share photos or videos, manage client access, and let them download albums in stunning PDF form — all in one place.</p>
                             
                             <div class="d-flex gap-2 mt-4">
-                                <button @click="openRegister()" class="btn btn-primary">Free Trial <i class="ri-arrow-right-line align-middle ms-1"></i></button>
-                                <BLink class="nav-link" href="#plans" @click.prevent="scrollToSection('plans')"><a href="pages-pricing.html" class="btn btn-danger">View Plans <i class="ri-eye-line align-middle ms-1"></i></a></BLink>
+                                <Link href="/register"><button class="btn btn-primary">Register Now</button></Link>
+                                <BLink class="nav-link" href="#plans" @click.prevent="scrollToSection('plans')"><a href="pages-pricing.html" class="btn btn-danger">View Plans</a></BLink>
                             </div>
 
                             <ul class="treding-keywords list-inline mb-0 mt-3 fs-13">
@@ -344,8 +344,7 @@
                     </BCol>
 
                     <BCol sm="auto">
-                        <BButton @click="openRegister()"  type="button" variant="danger">Subscribe Now <i
-                                class="ri-arrow-right-line align-bottom"></i></BButton>
+                        <Link href="/register"><BButton @click="openRegister()"  type="button" variant="danger">Register Now </BButton></Link>
                     </BCol>
 
                 </BRow>

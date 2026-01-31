@@ -35,7 +35,7 @@
                     <span class="fw-semibold fs-14" data-key="t-dashboards">Trash</span>
                     </Link>
                 </li>
-                <li class="menu-title">
+                <!-- <li class="menu-title">
                     <i class="ri-more-fill" aria-expanded="false"></i>
                     <span data-key="t-menu">Billing</span>
                 </li>
@@ -52,7 +52,7 @@
                     <i class="ri-bank-card-fill"></i>
                     <span class="fw-semibold fs-14" data-key="t-dashboards">Payments</span>
                     </Link>
-                </li>
+                </li> -->
             </template>
             <template v-if="$page.props.roles.includes('Administrator')">
                 <li class="menu-title">

@@ -19,7 +19,12 @@ class LoginController extends Controller
     public function create(): Response|RedirectResponse
     {
         if (Auth::check()) {
-            return redirect()->intended(route('dashboard'));
+            if(\Auth::guard('viewer')->check()){
+                dd('wew');
+                return redirect()->intended(route('participant.dashboard', absolute: false));
+            }else{
+                return redirect()->intended(route('dashboard', absolute: false));
+            }
         }
 
         return Inertia::render('Auth/Login', [

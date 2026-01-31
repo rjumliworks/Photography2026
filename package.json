@@ -49,6 +49,7 @@
         "filepond": "^4.32.11",
         "filepond-plugin-file-validate-type": "^1.2.9",
         "glightbox": "^3.3.1",
+        "html5-qrcode": "^2.3.8",
         "leaflet": "^1.9.4",
         "lottie-web": "^5.12.2",
         "maska": "^3.2.0",

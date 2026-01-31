@@ -28,6 +28,7 @@ class FolderViewResource extends JsonResource
             'owner' => new ProfileResource($this->user),
             'files' => FileResource::collection($this->files),
             'tags' => $this->tags,
+            'viewers' => $this->viewers,
             'opened_at' => $this->opened_at,
             'deleted_at' => $this->deleted_at,
             'created_at' => $this->created_at,

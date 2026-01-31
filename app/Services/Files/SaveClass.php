@@ -14,10 +14,6 @@ class SaveClass
 
         $hashids = new Hashids('krad',10);
         $code = $hashids->encode(\Auth::user()->id);
-
-        $kind = str_contains($file->getMimeType(), 'video') ? 'video' : 'image';
-        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs("folders/{$code}", $filename, 'public');
        
         $currentUsage = \Auth::user()->folders()->withSum('files', 'size')->get()->sum('files_sum_size');
 
@@ -26,6 +22,10 @@ class SaveClass
                 'data' => 'kradwashere!@#$%'
             ];
         }else{
+            $kind = str_contains($file->getMimeType(), 'video') ? 'video' : 'image';
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs("folders/{$code}", $filename, 'public');
+
             $folderFile = FolderFile::create([
                 'name' => $file->getClientOriginalName(),
                 'path' => $path,

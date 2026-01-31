@@ -51,6 +51,9 @@ class FolderController extends Controller
                 case 'tags':
                     return $this->save->tags($request);
                 break;
+                case 'viewer':
+                    return $this->save->viewer($request);
+                break;
             }
         });
 

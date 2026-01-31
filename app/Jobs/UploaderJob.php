@@ -25,74 +25,75 @@ class UploaderJob implements ShouldQueue
 
     public function handle()
     {
-        $meta = [];
-
         try {
-            $fullPath = storage_path("app/public/{$this->folderFile->path}");
 
-            if ($this->folderFile->kind === 'image') {
-                $imageInfo = getimagesize($fullPath);
-                $meta = [
-                    'width'  => $imageInfo[0] ?? null,
-                    'height' => $imageInfo[1] ?? null,
-                ];
-
-                $thumb50Path  = $this->makeThumbnail($fullPath, 50, 50, 'thumb_50x50');
-                $thumb250Path = $this->makeThumbnail($fullPath, 250, 250, 'thumb_250x250');
-
-                $meta['thumbnails'] = [
-                    '50x50'   => str_replace(storage_path("app/public/"), '', $thumb50Path),
-                    '250x250' => str_replace(storage_path("app/public/"), '', $thumb250Path),
-                ];
-            } else {
-                $ffprobe = \FFMpeg\FFProbe::create();
-                $duration = $ffprobe->format($fullPath)->get('duration');
-                $videoStream = $ffprobe->streams($fullPath)->videos()->first();
-
-                $meta = [
-                    'width'   => $videoStream?->get('width'),
-                    'height'  => $videoStream?->get('height'),
-                    'duration'=> $duration,
-                    'codec'   => $videoStream?->get('codec_name'),
-                ];
-
-                $thumbPath = "folders/video_thumb_{$this->folderFile->id}.jpg";
-                \FFMpeg::fromDisk('public')
-                    ->open($this->folderFile->path)
-                    ->getFrameFromSeconds(1)
-                    ->export()
-                    ->toDisk('public')
-                    ->save($thumbPath);
-
-                $meta['thumbnail'] = $thumbPath;
+            if ($this->folderFile->kind !== 'image') {
+                $this->folderFile->update(['status' => 'completed']);
+                return;
             }
 
+            $manager = new ImageManager(new Driver());
+
+            $originalFullPath = storage_path(
+                "app/public/{$this->folderFile->path}"
+            );
+
+            $img = $manager->read($originalFullPath);
+
+            // Paths
+            $baseDir  = dirname($this->folderFile->path);
+            $name     = pathinfo($this->folderFile->path, PATHINFO_FILENAME);
+
+            $previewPath = "{$baseDir}/previews/{$name}.webp";
+            $thumb50Path = "{$baseDir}/thumbs/{$name}_50x50.webp";
+            $thumb250Path = "{$baseDir}/thumbs/{$name}_250x250.webp";
+
+            // Ensure directories exist
+            foreach ([$previewPath, $thumb50Path, $thumb250Path] as $path) {
+                @mkdir(
+                    dirname(storage_path("app/public/{$path}")),
+                    0755,
+                    true
+                );
+            }
+
+            // Save preview
+            $img->encodeByExtension('webp', 85)
+                ->save(storage_path("app/public/{$previewPath}"));
+
+            // Thumbnails
+            $this->makeThumbnail($previewPath, 50, 50, $thumb50Path);
+            $this->makeThumbnail($previewPath, 250, 250, $thumb250Path);
+
             $this->folderFile->update([
-                'meta'   => $meta,
-                'status' => 'completed'
+                'meta' => [
+                    'width'  => $img->width(),
+                    'height' => $img->height(),
+                    'preview' => $previewPath,
+                    'thumbnails' => [
+                        '50x50'   => $thumb50Path,
+                        '250x250' => $thumb250Path,
+                    ],
+                ],
+                'status' => 'completed',
             ]);
 
         } catch (\Throwable $e) {
-            // If something fails, mark as failed
             $this->folderFile->update([
                 'status' => 'failed',
-                'meta'   => ['error' => $e->getMessage()]
+                'meta'   => ['error' => $e->getMessage()],
             ]);
         }
     }
 
-    protected function makeThumbnail(string $fullPath, int $width, int $height, string $suffix)
+    protected function makeThumbnail(string $source, int $w, int $h, string $target)
     {
         $manager = new ImageManager(new Driver());
-        $img = $manager->read($fullPath) ->cover($width, $height, 'center') // crop to center and fit exactly
-    ->encodeByExtension('png');
 
-        $dirname = pathinfo($fullPath, PATHINFO_DIRNAME);
-        $filename = pathinfo($fullPath, PATHINFO_FILENAME);
-        $extension = pathinfo($fullPath, PATHINFO_EXTENSION);
-
-        $thumbPath = "{$dirname}/{$filename}_{$suffix}.{$extension}";
-        $img->save($thumbPath);
-        return $thumbPath;
+        $manager
+            ->read(storage_path("app/public/{$source}"))
+            ->cover($w, $h)
+            ->encodeByExtension('webp', 80)
+            ->save(storage_path("app/public/{$target}"));
     }
 }

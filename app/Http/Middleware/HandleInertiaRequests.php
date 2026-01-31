@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use App\Models\User;
+use App\Models\Viewer;
 use App\Http\Resources\UserResource;
 
 class HandleInertiaRequests extends Middleware
@@ -20,9 +21,10 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            'user' => (\Auth::check()) ? new UserResource(User::with('profile')->where('id',\Auth::user()->id)->first()) : null,
-            'subscription' => (\Auth::check()) ? new UserResource(User::with('profile')->where('id',\Auth::user()->id)->first()) : '',
-            'roles' => (\Auth::check()) ? \Auth::user()->roles()->where('user_roles.is_active', 1)->pluck('name') : null,
+            'user' => (\Auth::guard('web')->check()) ? new UserResource(User::with('profile')->find(\Auth::guard('web')->id())) : null,
+            'subscription' => (\Auth::guard('web')->check()) ? new UserResource(User::with('profile')->where('id',\Auth::user()->id)->first()) : '',
+            'roles' => (\Auth::guard('web')->check()) ? \Auth::user()->roles()->where('user_roles.is_active', 1)->pluck('name') : null,
+            'viewer' => (\Auth::guard('viewer')->check()) ? Viewer::with('folders.folder')->find(\Auth::guard('viewer')->id()) : null,
             'flash' => [
                 'data'    => session('data') ?? null,
                 'message' => session('message') ?? null,

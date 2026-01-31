@@ -5,9 +5,9 @@
             <BContainer>
 
                 <BRow class="justify-content-center">
-                    <BCol md="9" lg="7" xl="5">
+                    <BCol md="9" lg="7" xl="6">
                         <div class="card bg-light-subtle shadow-none border">
-                            <div class="card-header bg-success">
+                            <div class="card-header bg-primary">
                                 <div class="text-center mt-0 mb-n3">
                                     <img src="@assets/images/logo-sm.png" alt="" class="avatar-sm mb-n2 mt-n1">
                                     <h5 class="text-white mb-0 mt-3">Create New Account</h5>
@@ -23,7 +23,7 @@
                                     </div>
                                     <BRow class="g-2 mt-1">
                                         <BCol lg="6" class="mt-n1">
-                                            <label style="font-size: 11px;  margin-bottom: -10px;"><i class="ri-user-3-fill"></i> Sex</label>
+                                            <label style="font-size: 11px;  margin-bottom: -10px;"><i class=" ri-men-fill"></i> Sex</label>
                                             <Multiselect :options="dropdowns.sexes" :searchable="true" label="name" v-model="form.sex_id" placeholder="Select Sex" @input="handleInput('sex_id')" :light="true" style="color: black;"/>
                                         </BCol>
                                         <BCol lg="6" class="mt-n1">
@@ -78,7 +78,7 @@
                                     </div>
                                     <p class="fs-10 text-muted">By clicking Sign Up, you agree to our <b class="text-primary">Terms, Privacy Policy</b> and <b class="text-primary">Cookies Policy</b>. You may receive SMS Notifications from us and can opt out any time.</p>
                                     <div class="mt-3 mb-">
-                                        <BButton variant="success" class="w-100" type="submit" :class="['some-class', form.processing && 'opacity-25']" :disabled="form.processing">Sign Up</BButton>
+                                        <BButton variant="primary" class="w-100" type="submit" :class="['some-class', form.processing && 'opacity-25']" :disabled="form.processing">Sign Up</BButton>
                                     </div>
                                 </form>
                             </div>

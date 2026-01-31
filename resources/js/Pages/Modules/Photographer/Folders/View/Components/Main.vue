@@ -86,7 +86,7 @@
             <div class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1 p-3 mt-2">
                 <div class="col list-element" v-for="(list,index) in filteredFiles" v-bind:key="index">
                     <div class="card explore-box card-animate">
-                        <a class="glightbox" :href="'/storage/' + list.path">
+                        <a class="glightbox" :href="'/storage/' + list.meta.preview">
                             <div class="explore-place-bid-img overflow-hidden rounded"> 
                                 <img :src="list.meta?.thumbnails?.['250x250'] 
                                 ? '/storage/' + list.meta.thumbnails['250x250'] 
@@ -108,7 +108,7 @@
                                     <i class="ri-more-2-fill"></i>
                                 </template>
                                 <li>
-                                    <a :href="'/storage/' + list.path" class="glightbox dropdown-item d-flex align-items-center" role="button">
+                                    <a :href="'/storage/' + list.meta.preview" class="glightbox dropdown-item d-flex align-items-center" role="button">
                                         <i class="ri-eye-line me-2"></i> Preview
                                     </a>
                                 </li>

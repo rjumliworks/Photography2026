@@ -18,6 +18,23 @@
         <div class="card-body bg-white rounded-bottom border-bottom">
             <div class="d-flex mb-n2">
                 <div class="flex-shrink-0 me-3">
+                    <p class="mb-0 text-primary fs-12 fw-semibold">Viewers</p>
+                </div>
+                <div class="flex-grow-1 mt-n1">
+                    <i @click="openViewer()" class="ri-add-circle-fill float-end text-muted fs-20" style="cursor: pointer;"></i>
+                </div>
+            </div>
+        </div>     
+        <div class="card bg-white shadow-none mb-0" style="height: 150px; overflow: hidden;">
+            <ul class="list-group list-group-flush border-dashed mb-n4 mt-n3 p-3">
+                <li class="mt-2 ms-2" v-for="(list,index) in folder.viewers" v-bind:key="index">
+                   {{list.viewer.email}}
+                </li>
+            </ul>
+        </div>
+        <!-- <div class="card-body bg-white rounded-bottom border-bottom border-top">
+            <div class="d-flex mb-n2">
+                <div class="flex-shrink-0 me-3">
                     <p class="mb-0 text-primary fs-12 fw-semibold">Tags</p>
                 </div>
                 <div class="flex-grow-1 mt-n1">
@@ -51,8 +68,8 @@
                     This folder is not password protected.
                 </div>
             </div>
-        </div>
-        <div class="card bg-white rounded-bottom shadow-none mb-0" style="height: calc(100vh - 556px); overflow: auto;">
+        </div> -->
+        <div class="card bg-white rounded-bottom shadow-none mb-0" style="height: calc(100vh - 545px); overflow: auto;">
             <hr class="text-muted"/>
                 <div class="d-flex mb-n2 ms-3 me-3">
                     <div class="flex-shrink-0 me-3">
@@ -118,16 +135,18 @@
     <Tag :folder_tags="folder.tags" ref="tag"/>
     <Password ref="password"/>
     <ViewPassword ref="view"/>
+    <Viewer ref="viewer"/>
     <Access :types="types" :type="folder.type" :visibilities="visibilities" :shares="folder.shares" ref="access"/>
 </template>
 <script>
 import Tag from '../Modals/Tag.vue';
+import Viewer from '../Modals/Viewer.vue';
 import Access from '../Modals/Access.vue';
 import Password from '../Modals/Password.vue';
 import ViewPassword from '../Modals/ViewPassword.vue';
 export default {
     props:['folder','used','plan','percent','types','visibilities'],
-    components: { Tag, Access, Password, ViewPassword },
+    components: { Tag, Access, Password, ViewPassword, Viewer },
     data(){
         return {
             currentUrl: window.location.origin,
@@ -154,6 +173,9 @@ export default {
     methods: {
         openTag(){
             (this.folder.tags.length > 0) ? this.$refs.tag.edit(this.folder.id) : this.$refs.tag.show(this.folder.id);
+        },
+        openViewer(){
+            this.$refs.viewer.show(this.folder.id);
         },
         openAccess(owner){
             this.$refs.access.show(this.folder.id,owner);

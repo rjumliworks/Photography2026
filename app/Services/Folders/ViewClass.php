@@ -57,6 +57,7 @@ class ViewClass
             ->with('files.user.profile','files.comments.user.profile','files.likes.user.profile')
             ->with('password')
             ->with('tags')
+            ->with('viewers.viewer')
             ->with('gears')
             ->with('type')
             ->with('shares.user.profile','shares.type','shares.status')

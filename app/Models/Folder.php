@@ -33,6 +33,11 @@ class Folder extends Model
         return $this->belongsTo('App\Models\ListDropdown', 'type_id', 'id');
     }
 
+    public function viewers()
+    {
+        return $this->hasMany('App\Models\ViewerFolder', 'folder_id');
+    }
+
     public function shares()
     {
         return $this->hasMany('App\Models\FolderShare', 'folder_id');

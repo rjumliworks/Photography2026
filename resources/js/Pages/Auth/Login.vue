@@ -7,7 +7,7 @@
                 <BRow class="justify-content-center">
                     <BCol md="9" lg="7" xl="5">
                         <div class="card bg-light-subtle shadow-none border">
-                            <div class="card-header bg-success">
+                            <div class="card-header bg-primary">
                                 <div class="d-flex mb-n2">
                                     <div class="flex-shrink-0 me-3">
                                         <div style="height:2.5rem;width:2.5rem;">
@@ -23,7 +23,7 @@
                             <div class="car-body bg-white shadow-none" style="padding: 33px;">
                                 <form class="customform" @submit.prevent="submit">
                                     <div class="alert alert-warning alert-border-left alert-dismissible fade show material-shadow fs-11" role="alert">
-                                        <span class="fs-10" style="line-height: 1.2; display: inline-block;"> <strong>Security Notice :</strong> This system is restricted to authorized government personnel only. Unauthorized access is prohibited.</span>
+                                        <span class="fs-10" style="line-height: 1.2; display: inline-block;"> <strong>Security Notice :</strong> This system is restricted to authorized photograpers only. Unauthorized access is prohibited.</span>
                                     </div>
                                     <div class="mb-2">
                                         <label><i class="ri-profile-line"></i> Email Address</label>
@@ -62,7 +62,7 @@
                                         <label class="form-check-label" for="auth-remember-check">Remember me</label>
                                     </div>
                                     <div class="mt-3 mb-">
-                                        <BButton variant="success" class="w-100" type="submit" :class="['some-class', form.processing && 'opacity-25']" :disabled="form.processing">Sign In</BButton>
+                                        <BButton variant="primary" class="w-100" type="submit" :class="['some-class', form.processing && 'opacity-25']" :disabled="form.processing">Sign In</BButton>
                                     </div>
                                     <!-- <div class="mt-3 text-center">
                                         <div class="signin-other-title">

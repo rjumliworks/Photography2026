@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\VelzonRoutesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,5 +36,14 @@ Route::middleware(['role:Administrator'])->group(function () {
     Route::resource('/plans', App\Http\Controllers\Executive\PlanController::class);
     Route::resource('/references', App\Http\Controllers\Executive\ReferenceController::class);
 });
+
+Route::get('/viewer/login', [App\Http\Controllers\ViewerController::class, 'login'])->name('viewer.login');
+Route::middleware('auth:viewer')->group(function () {
+    Route::get('/viewer', [App\Http\Controllers\ViewerController::class, 'view'])->name('viewer.dashboard');
+    Route::get('/viewer/logout', [App\Http\Controllers\ViewerController::class, 'logout'])->name('viewer.logout');
+    Route::get('/viewer/{folder}/download', [App\Http\Controllers\ViewerController::class, 'download']);
+});
+Route::post('/mail', [App\Http\Controllers\OtpController::class, 'mail']);
+Route::post('/verify', [App\Http\Controllers\OtpController::class, 'verify']);
 
 require __DIR__.'/auth.php';
