@@ -31,8 +31,8 @@
                                     <div class="col-md-12"> 
                                         <div class="d-flex w-100 justify-content-center align-items-center mb-2">
                                             <div class="p-4 w-100 border rounded bg-dark-subtle text-center">
-                                                <p class="mb-0 text-dark fs-12"> Please face the camera to begin.</p>
-                                                <p class="mb-0 text-muted fs-11"> Make sure your face is clearly visible for accurate recognition.</p>
+                                                <p class="mb-0 text-dark fs-12">Hi {{ viewer.name }},</p>
+                                                <p class="mb-0 text-muted fs-11"> Please tell your photograper to add you to the folders viewer list.</p>
                                             </div>
                                         </div>
 
