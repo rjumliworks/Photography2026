@@ -1,10 +1,3 @@
-<script>
-import PageHeader from '@/Shared/Components/PageHeader.vue';
-export default {
-  components: { PageHeader },
-}
-</script>
-
 <template>
     <PageHeader title="Dashboard" pageTitle="Hehe" />
     <BRow>
@@ -13,3 +6,10 @@ export default {
         </BCol>
     </BRow>
 </template>
+<script>
+
+import PageHeader from '@/Shared/Components/PageHeader.vue';
+export default {
+  components: { PageHeader },
+}
+</script>

@@ -19,11 +19,10 @@ class LoginController extends Controller
     public function create(): Response|RedirectResponse
     {
         if (Auth::check()) {
-            if(\Auth::guard('viewer')->check()){
-                dd('wew');
+            if(\Auth::guard('viewer')->check()){ 
                 return redirect()->intended(route('participant.dashboard', absolute: false));
             }else{
-                return redirect()->intended(route('dashboard', absolute: false));
+                return redirect()->intended(route('web.dashboard', absolute: false));
             }
         }
 
@@ -54,7 +53,7 @@ class LoginController extends Controller
                
                 return redirect()->intended(route('activation', absolute: false));
             }
-            return redirect()->intended(route('dashboard', absolute: false));
+            return redirect()->intended(route('web.dashboard', absolute: false));
         }else{
             throw ValidationException::withMessages([
                 'email' => 'Account Locked, Please contact administrator.',

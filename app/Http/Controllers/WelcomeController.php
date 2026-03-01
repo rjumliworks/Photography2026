@@ -25,7 +25,7 @@ class WelcomeController extends Controller
 
     public function index(){
         if (\Auth::check()) {
-            return redirect()->intended(route('dashboard'));
+            return redirect()->intended(route('web.dashboard'));
         }
 
         return inertia('Welcome',[

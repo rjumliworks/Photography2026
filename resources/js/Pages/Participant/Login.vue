@@ -2,7 +2,7 @@
     <Head title="Date Time Record"/>
     <div class="d-flex justify-content-center align-items-center min-vh-100">
         <div class="auth-page-content">
-            <BContainer style="width: 800px;">
+            <BContainer style="width: 500px;">
 
                 <BRow class="justify-content-center">
                     <div class="col-lg-12">
@@ -21,18 +21,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body" style="height: 400px;">
+                            <div class="card-body" style="height: 300px;">
 
                                 <form class="customform">
                                     <BRow class="g-3"> 
-                                        <div class="p-2 mt-5" v-if="!sent">
-                                            <div class="text-muted text-center mb-5 mx-lg-3">
+                                        <div class="p-2 mt-4" v-if="!sent">
+                                            <div class="text-muted text-center mb-4 mx-lg-3">
                                                 <h4 class="fs-16 mb-0">Welcome Back!</h4>
                                                 <p class="fs-12">Sign in using your <span class="fw-semibold">email address</span>.</p>
                                             </div>
                                             <form>
                                                 <div class="row justify-content-center">
-                                                    <div class="col-6 mt-2 mb-2">
+                                                    <div class="col-10 mt-2 mb-2">
                                                         <TextInput id="name" v-model="form.email" type="text" class="form-control" placeholder="Please enter email" @input="handleInput('email')" style="text-transform: lowercase; background-color: white;" :light="true"/>
                                                         
                                                         <div class="mt-3">
@@ -46,13 +46,13 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="p-2 mt-5" v-else>
-                                            <div class="text-muted text-center mb-5 mx-lg-3">
+                                        <div class="p-2 mt-4" v-else>
+                                            <div class="text-muted text-center mb-4 mx-lg-3">
                                                 <h4 class="fs-16 mb-0">Enter One-Time Password</h4>
                                                 <p class="fs-12">Please enter the one-time Password (OTP) that we sent to <span class="fw-semibold">kradj****@gmail.com</span></p>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <div class="col-md-6">
+                                                <div class="col-md-10">
                                                     <form>
                                                         <div class="d-flex gap-2">
                                                             <input

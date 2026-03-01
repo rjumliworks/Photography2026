@@ -1,33 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Viewer;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
 use ZipArchive;
 use App\Models\Folder;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
-class ViewerController extends Controller
+class DownloadController extends Controller
 {
-    public function view(){
-        return inertia('Participant/Dashboard/Index');
-    }
-
-    public function login(){
-        dd(auth('viewer')->check());
-        return inertia('Participant/Login');
-    }
-
-    public function logout(Request $request): RedirectResponse
-    {
-        Auth::guard('viewer')->logout(); // logout the participant guard
-        $request->session()->invalidate();     // invalidate session
-        $request->session()->regenerateToken(); // regenerate CSRF token
-
-        return redirect('/viewer/login'); // or any route you prefer
+    public function index(){
+        return inertia('Participant/Downloads/Index');
     }
 
     public function download(Folder $folder)

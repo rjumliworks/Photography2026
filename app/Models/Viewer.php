@@ -28,6 +28,10 @@ class Viewer extends Authenticatable
         return ucwords(Crypt::decryptString($value));
     }
 
+    public function likes()
+    {
+        return $this->morphMany(FolderFileLike::class, 'liker');
+    }
 
     public function setEmailAttribute($value)
     {

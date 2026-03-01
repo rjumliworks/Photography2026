@@ -21,10 +21,25 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            'user' => (\Auth::guard('web')->check()) ? new UserResource(User::with('profile')->find(\Auth::guard('web')->id())) : null,
-            'subscription' => (\Auth::guard('web')->check()) ? new UserResource(User::with('profile')->where('id',\Auth::user()->id)->first()) : '',
-            'roles' => (\Auth::guard('web')->check()) ? \Auth::user()->roles()->where('user_roles.is_active', 1)->pluck('name') : null,
-            'viewer' => (\Auth::guard('viewer')->check()) ? Viewer::with('folders.folder')->find(\Auth::guard('viewer')->id()) : null,
+
+            'user' => \Auth::guard('web')->check()
+                ? new UserResource(
+                    User::with('profile')
+                        ->find(\Auth::guard('web')->id())
+                )
+                : null,
+
+            'roles' => \Auth::guard('web')->check()
+                ? \Auth::guard('web')->user()
+                    ->roles()
+                    ->where('user_roles.is_active', 1)
+                    ->pluck('name')
+                : null,
+
+            'viewer' => \Auth::guard('viewer')->check()
+                ? Viewer::find(\Auth::guard('viewer')->id())
+                : null,
+
             'flash' => [
                 'data'    => session('data') ?? null,
                 'message' => session('message') ?? null,

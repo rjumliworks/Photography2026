@@ -1,6 +1,6 @@
 <template>
-    <Head title="Date Time Record"/>
-    <PageHeader title="Dashboard" pageTitle="Menu" />
+    <Head title="Downloads"/>
+    <PageHeader title="Downloads" pageTitle="Menu" />
     <BRow>
         <div class="col-md-12"> 
                                        
@@ -23,10 +23,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-body rounded-bottom">
+                                            <div class="card-body bg-white rounded-bottom">
                                                 <div class="table-responsive table-card" ref="scrollabletable" style="overflow-y:auto; overflow-x:hidden;">
                                                     <table class="table table-nowrap align-middle mb-0">
-                                                        <thead class="thead-fixed">
+                                                        <thead class="bg-light thead-fixed">
                                                             <tr class="fs-10">
                                                                 <th style="width: 7%;" class="text-center">#</th>
                                                                 <th>Name</th>
@@ -77,11 +77,11 @@ export default {
    
     methods: {
         downloadFolder(folderId) {
-            window.location.href = `/viewer/${folderId}/download`
+            window.location.href = `/${folderId}/download`
         },
         async logout() {
             try {
-                await axios.get('/viewer/logout')
+                await axios.get('/logout')
                 window.location.href = '/viewer/login' // redirect manually after logout
             } catch (error) {
                 console.error('Logout failed:', error)

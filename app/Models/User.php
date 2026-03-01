@@ -47,6 +47,11 @@ class User extends Authenticatable  implements MustVerifyEmail
         ];
     }
 
+    public function likes()
+    {
+        return $this->morphMany(FolderFileLike::class, 'liker');
+    }
+
     public function profile()
     {
         return $this->hasOne('App\Models\UserProfile', 'user_id');

@@ -12,7 +12,7 @@ class FolderFileComment extends Model
     use HasFactory, LogsActivity;
 
     protected $fillable = [
-        'file_id','user_id','comment'
+        'file_id','comment','commenter_id','commenter_type'
     ];
 
     public function file()
@@ -20,9 +20,9 @@ class FolderFileComment extends Model
         return $this->belongsTo('App\Models\FolderFile', 'file_id', 'id');
     }
 
-    public function user()
+    public function commenter()
     {
-        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+        return $this->morphTo();
     }
 
     public function getActivitylogOptions(): LogOptions {
