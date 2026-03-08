@@ -31,58 +31,65 @@ class DownloadController extends Controller
     }
 
     public function download(Folder $folder)
-    {
-        $viewer = auth('viewer')->user();
+{
+    $viewer = auth('viewer')->user();
 
-        // 🔐 Authorization: viewer must have access to folder
-        if (! $folder->viewers()->where('viewer_id', $viewer->id)->exists()) {
-            abort(403);
-        }
-
-        $zipFileName = Str::slug($folder->name) . '.zip';
-        $zipPath = storage_path("app/temp/{$zipFileName}");
-
-        // Ensure temp directory exists
-        if (! file_exists(dirname($zipPath))) {
-            mkdir(dirname($zipPath), 0755, true);
-        }
-        
-        $password = $folder->password?->password;
-        $zip = new ZipArchive;
-
-        if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
-            abort(500, 'Unable to create ZIP file.');
-        }
-
-        if ($password) {
-            $zip->setPassword($password);
-        }
-        // Add ORIGINAL files only
-        foreach ($folder->files as $file) {
-            $absolutePath = storage_path("app/public/{$file->path}");
-
-            if (file_exists($absolutePath)) {
-                $zip->addFile(
-                    $absolutePath,
-                    $file->name // keep original filename
-                );
-                $zip->setEncryptionName($file->name, ZipArchive::EM_AES_256);
-                if ($password) {
-                     $zip->setEncryptionName($file->name, ZipArchive::EM_AES_256);
-                }
-            }
-        }
-
-        if($zip->close()){
-            $download = ViewerFolderDownload::firstOrCreate([
-                'viewer_id' => $viewer->id,
-                'folder_id' => $folder->id,
-            ]);
-
-            $download->increment('count');
-        }
-
-        // Stream + auto delete
-        return response()->download($zipPath)->deleteFileAfterSend(true);
+    // 🔐 Authorization
+    if (! $folder->viewers()->where('viewer_id', $viewer->id)->exists()) {
+        abort(403);
     }
+
+    $zipFileName = Str::slug($folder->name) . '.zip';
+    $zipPath = storage_path("app/temp/{$zipFileName}");
+
+    // Ensure temp directory exists
+    if (! file_exists(dirname($zipPath))) {
+        mkdir(dirname($zipPath), 0755, true);
+    }
+
+    $password = $folder->password?->password;
+    $zip = new ZipArchive;
+
+    if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
+        abort(500, 'Unable to create ZIP file.');
+    }
+
+    $addedFiles = 0; // Track files actually added
+
+    foreach ($folder->files as $file) {
+        $absolutePath = storage_path("app/public/{$file->path}");
+
+        if (file_exists($absolutePath)) {
+            $nameInZip = $file->name;
+
+            if ($password) {
+                // AES encryption requires password per file
+                $zip->addFile($absolutePath, $nameInZip);
+                $zip->setEncryptionName($nameInZip, ZipArchive::EM_AES_256, $password);
+            } else {
+                $zip->addFile($absolutePath, $nameInZip);
+            }
+
+            $addedFiles++;
+        }
+    }
+
+    if ($addedFiles === 0) {
+        $zip->close();
+        abort(404, 'No files available to download.');
+    }
+
+    if (! $zip->close()) {
+        abort(500, 'Failed to finalize ZIP file.');
+    }
+
+    // Track viewer download
+    $download = ViewerFolderDownload::firstOrCreate([
+        'viewer_id' => $viewer->id,
+        'folder_id' => $folder->id,
+    ]);
+    $download->increment('count');
+
+    return response()->download($zipPath)->deleteFileAfterSend(true);
+}
 }
