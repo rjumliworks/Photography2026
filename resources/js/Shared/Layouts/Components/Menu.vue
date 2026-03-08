@@ -35,6 +35,17 @@
                     <span class="fw-semibold fs-14" data-key="t-dashboards">Trash</span>
                     </Link>
                 </li>
+                <li class="menu-title">
+                    <i class="ri-more-fill" aria-expanded="false"></i>
+                    <span data-key="t-menu">Lists</span>
+                </li>
+                <li class="nav-item">
+                    <Link href="/subscriptions" class="nav-link menu-link"
+                    :class="{'active': $page.component.startsWith('Modules/Photographer/Subscription') }">
+                    <i class="ri-price-tag-3-fill"></i>
+                    <span class="fw-semibold fs-14" data-key="t-dashboards">Subscription</span>
+                    </Link>
+                </li>
                 <!-- <li class="menu-title">
                     <i class="ri-more-fill" aria-expanded="false"></i>
                     <span data-key="t-menu">Billing</span>

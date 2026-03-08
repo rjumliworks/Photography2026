@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('folder_passwords', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('password');
+            $table->longText('password');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('folder_id');

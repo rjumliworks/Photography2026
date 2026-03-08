@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="d-flex align-items-center">
-                    <BDropdown class="dropdown" variant="ghost-secondary" dropstart :offset="{ alignmentAxis: 57, crossAxis: 0, mainAxis: -42 }" toggle-class="btn-icon btn-topbar rounded-circle mode-layout ms-1 material-shadow-none" no-caret menu-class="p-0 dropdown-menu-end">
+                    <!-- <BDropdown class="dropdown" variant="ghost-secondary" dropstart :offset="{ alignmentAxis: 57, crossAxis: 0, mainAxis: -42 }" toggle-class="btn-icon btn-topbar rounded-circle mode-layout ms-1 material-shadow-none" no-caret menu-class="p-0 dropdown-menu-end">
                         <template #button-content>
                             <i class="bx bx-category-alt fs-22"></i>
                         </template>
@@ -94,7 +94,7 @@
                                 </BCol>
                             </BRow>
                         </div>
-                    </BDropdown>
+                    </BDropdown> -->
 
                     <div class="ms-1 header-item d-none d-sm-flex">
                         <BButton type="button" variant="ghost-secondary" class="btn-icon btn-topbar rounded-circle material-shadow-none" data-toggle="fullscreen" @click="initFullScreen">
