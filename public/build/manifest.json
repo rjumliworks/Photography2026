@@ -1224,12 +1224,12 @@
     "src": "public/images/sidebar/img-4.jpg"
   },
   "resources/js/app.js": {
-    "file": "assets/app-9ThKO68a.js",
+    "file": "assets/app-BcyTPHAV.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-BSjT8f3Z.css"
+      "assets/app-CLyREOkS.css"
     ],
     "assets": [
       "assets/logo-sm-CvwRMLbm.png",

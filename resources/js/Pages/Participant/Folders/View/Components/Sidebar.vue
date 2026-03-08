@@ -53,6 +53,25 @@
                     </div>
                 </li>
             </ul>
+            <template v-if="folder.password">
+                <hr class="text-muted"/>
+                <p class="ms-3 mb-0 text-primary fs-12 fw-semibold">Folder Password</p>
+                <hr class="text-muted mb-2"/>
+                <div class="p-3 mt-n2 mb-n3">
+                    <div class="position-relative auth-pass-inputgroup">
+                        <div class="form-icon">
+                            <input :type="togglePassword ? 'text' : 'password'" 
+                             class="form-control form-control-icon" :value="folder.password?.password"
+                            id="password-input" placeholder="Please enter password" 
+                            style="background-color: #f5f6f7;" readonly="">
+                            <i class="ri-lock-2-fill text-muted"></i>
+                        </div>
+                        <BButton variant="link" class="position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon" @click="togglePassword = !togglePassword">
+                            <i class="ri-eye-fill align-middle"></i>
+                        </BButton>
+                    </div>
+                </div>
+            </template>
             <hr class="text-muted"/>
                 <p class="ms-3 mb-0 text-primary fs-12 fw-semibold">Subscription Overview</p>
             <hr class="text-muted mb-2"/>
@@ -90,7 +109,7 @@ export default {
     props:['folder','used'],
     data(){
         return {
-            currentUrl: window.location.origin,
+            togglePassword: false
         }
     },
     computed: {

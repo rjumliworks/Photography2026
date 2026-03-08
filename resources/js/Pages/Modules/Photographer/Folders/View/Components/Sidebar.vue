@@ -15,7 +15,30 @@
                 </div>
             </div>
         </div>
-        <div class="card-body bg-white rounded-bottom border-bottom">
+         <div class="card-body bg-white rounded-bottom border-bottom">
+            <div class="d-flex mb-n2">
+                <div class="flex-shrink-0 me-3">
+                    <p class="mb-0 text-primary fs-12 fw-semibold">Password Protected</p>
+                </div>
+                <div class="flex-grow-1 mt-n1" v-if="folder.owner.id == $page.props.user.data.id">
+                    <i v-if="folder.is_protected" @click="viewPassword(folder.password)" class="ri-eye-fill float-end text-muted fs-20" style="cursor: pointer;"></i>
+                    <i v-else @click="openPassword(folder.owner)" class="ri-add-circle-fill float-end text-muted fs-20" style="cursor: pointer;"></i>
+                </div>
+            </div>
+        </div>     
+        <div class="card bg-white shadow-none mb-0" style="height: 67px; overflow: hidden;">
+             <div class="ps-3 pe-3 pt-2 mt-1">
+                <div v-if="folder.is_protected" class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show material-shadow fs-12" role="alert">
+                    <i class="ri-lock-fill label-icon"></i>
+                    This folder is password protected.
+                </div>
+                <div v-else class="alert alert-info alert-dismissible alert-label-icon label-arrow fade show material-shadow fs-12" role="alert">
+                    <i class="ri-information-line label-icon"></i>
+                    This folder is not password protected.
+                </div>
+            </div>
+        </div>
+        <div class="card-body bg-white rounded-bottom border-top border-bottom">
             <div class="d-flex mb-n2">
                 <div class="flex-shrink-0 me-3">
                     <p class="mb-0 text-primary fs-12 fw-semibold">Viewers</p>
@@ -25,7 +48,7 @@
                 </div>
             </div>
         </div>     
-        <div class="card bg-white shadow-none mb-0" style="height: 150px; overflow: hidden;">
+        <div class="card bg-white shadow-none mb-0" style="height: 130px; overflow: hidden;">
             <ul class="list-group list-group-flush border-dashed mb-n4 mt-n3 p-3">
                 <li class="mt-2 ms-2" v-for="(list,index) in folder.viewers" v-bind:key="index">
                    {{list.viewer.email}}
@@ -41,12 +64,8 @@
                     <i @click="openTag()" class="ri-add-circle-fill float-end text-muted fs-20" style="cursor: pointer;"></i>
                 </div>
             </div>
-        </div>
-        <div class="card bg-white shadow-none mb-0" style="height: 160px; overflow: hidden;">
-            <div class="d-flex flex-wrap gap-2 p-3 mb-n3">
-                <span v-if="folder.tags.length > 0" class="badge bg-secondary" v-for="(list,index) in folder.tags" v-bind:key="index">{{ list.name }}</span>
-                <span v-else class="badge bg-light text-dark">Add Tag now</span>
-            </div>
+        </div>-->
+        <!-- <div class="card bg-white shadow-none mb-0" style="height: 160px; overflow: hidden;">
             <hr class="text-muted"/>
                 <div class="d-flex mb-n2 ms-3 me-3">
                     <div class="flex-shrink-0 me-3">
@@ -68,8 +87,8 @@
                     This folder is not password protected.
                 </div>
             </div>
-        </div> -->
-        <div class="card bg-white rounded-bottom shadow-none mb-0" style="height: calc(100vh - 545px); overflow: auto;">
+        </div>  -->
+        <div class="card bg-white rounded-bottom shadow-none mb-0" style="height: calc(100vh - 645px); overflow: auto;">
             <hr class="text-muted"/>
                 <div class="d-flex mb-n2 ms-3 me-3">
                     <div class="flex-shrink-0 me-3">

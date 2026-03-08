@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="card-body bg-white rounded-bottom">
-                    <div class="table-responsive table-card" style="margin-top: -39px; height: calc(100vh - 470px); overflow: auto;">
+                    <div class="table-responsive table-card" style="margin-top: -59px; height: calc(100vh - 458px); overflow: auto;">
                         <table class="table align-middle table-striped table-centered mb-0">
                             <thead class="table-light thead-fixed">
                                 <tr class="fs-11">
@@ -110,7 +110,12 @@
                                                         <i class="ri-eye-fill me-2"></i> View
                                                     </Link>
                                                 </li>
-                                               
+                                               <li><hr class="dropdown-divider"></li>
+                                                <li>
+                                                    <a @click="downloadFolder(list.id)" class="dropdown-item d-flex align-items-center" role="button">
+                                                        <i class="ri-download-2-fill me-2"></i> Download
+                                                    </a>
+                                                </li>
                                             </BDropdown>
                                         </div>
                                         
@@ -208,7 +213,10 @@ export default {
         },
         updateRow(data){
             this.lists[this.index] = data;
-        }
+        },
+        downloadFolder(folderId) {
+            window.location.href = `/${folderId}/download`
+        },
     }
 }
 </script>

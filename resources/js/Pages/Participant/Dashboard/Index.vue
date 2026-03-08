@@ -1,10 +1,10 @@
 <template>
     <PageHeader title="Dashboard" pageTitle="Menu" />
     <b-row class="g-3">
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <Sidebar ref="sidebar"/>
-        </div>
-        <div class="col-md-9">
+        </div> -->
+        <div class="col-md-12">
             <Main :folders="folders.data" ref="main"/>
         </div>
     </b-row>

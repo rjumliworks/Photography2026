@@ -6,12 +6,28 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use ZipArchive;
 use App\Models\Folder;
+use App\Models\ViewerFolderDownload;
 use Illuminate\Support\Str;
+use App\Http\Resources\Common\DownloadResource;
 
 class DownloadController extends Controller
 {
-    public function index(){
-        return inertia('Participant/Downloads/Index');
+    public function index(Request $request){
+        switch($request->option){
+            case 'list':
+                return $this->list($request);
+            break;
+            default:
+                return inertia('Participant/Downloads/Index');
+        }
+    }
+
+    public function list($request){
+        
+        $data = ViewerFolderDownload::with('folder','viewer')
+        ->where('viewer_id',\Auth::guard('viewer')->id())
+        ->paginate(10);
+        return DownloadResource::collection($data);
     }
 
     public function download(Folder $folder)
@@ -30,13 +46,17 @@ class DownloadController extends Controller
         if (! file_exists(dirname($zipPath))) {
             mkdir(dirname($zipPath), 0755, true);
         }
-
+        
+        $password = $folder->password?->password;
         $zip = new ZipArchive;
 
         if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
             abort(500, 'Unable to create ZIP file.');
         }
 
+        if ($password) {
+            $zip->setPassword($password);
+        }
         // Add ORIGINAL files only
         foreach ($folder->files as $file) {
             $absolutePath = storage_path("app/public/{$file->path}");
@@ -46,10 +66,21 @@ class DownloadController extends Controller
                     $absolutePath,
                     $file->name // keep original filename
                 );
+                $zip->setEncryptionName($file->name, ZipArchive::EM_AES_256);
+                if ($password) {
+                     $zip->setEncryptionName($file->name, ZipArchive::EM_AES_256);
+                }
             }
         }
 
-        $zip->close();
+        if($zip->close()){
+            $download = ViewerFolderDownload::firstOrCreate([
+                'viewer_id' => $viewer->id,
+                'folder_id' => $folder->id,
+            ]);
+
+            $download->increment('count');
+        }
 
         // Stream + auto delete
         return response()->download($zipPath)->deleteFileAfterSend(true);

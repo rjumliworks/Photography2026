@@ -54,7 +54,7 @@ class ViewClass
         $hashids = new Hashids('krad',10);
         $id = $hashids->decode($code);
         $folder = Folder::query()
-            ->with('files.user.profile','files.comments.user.profile','files.likes.user.profile')
+            ->with('files.user.profile','files.comments.commenter','files.likes.liker')
             ->with('password')
             ->with('tags')
             ->with('viewers.viewer')
@@ -73,7 +73,7 @@ class ViewClass
         $hashids = new Hashids('krad',10);
         $id = $hashids->decode($code);
         $files = FolderFile::where('folder_id', $id)
-        ->with(['user.profile','comments.user.profile','likes.user.profile'])
+        ->with(['user.profile','comments.commenter','likes.liker'])
         ->latest()
         ->paginate(20);
 
